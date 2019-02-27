@@ -1,24 +1,38 @@
 # Schema
 
+* relationship
+  * *fk: person_id*
+  * *fk: employee_id*
+  * *fk: contractor_id*
+  * *fk: benefactor_id*
+  * *fk: poi_id*
+    * _(Person of Importance)_
+  * *fk: prospect_id*
+  * *fk: student_id*
+  * *fk: alumnus_id*
+  * *fk: user_id*
 * person
-  * _Just the standard columns_
-* name < person
+* person_name < person
   * *fk: person_id*
   * *fk: name_type_id*
-  * active
   * first
   * middle
   * last
-* name_type
-  * type
+* person_photo
+  * *fk: person_id*
+  * image
+  * current
+* core_name_type
+  * identity
     * legal_primary
     * legal_alias
     * preferred
     * former
     * other_alias
-* personal_data
+* personal_data < person
   * *fk: person_id*
   * birth_date
+  * alt_birth_date
   * *fk: sex_id*
   * *fk: gender_id*
   * gender_description
@@ -34,17 +48,98 @@
     * non_binary
     * trans_female
     * trans_male
-* relationship
+* employee < person
   * *fk: person_id*
-  * *fk: employee_id*
-  * *fk: contractor_id*
+  * *fk: employee_type_id*
+  * position
+  * *fk: department_id*
+  * earnings
+  * *fk: earnings_type_id*
+  * *fk: currency_id*
+  * upper_level
+* core_employee_type
+  * identity
+    * full_time
+    * part_time
+    * temporary
+* department < division
+  * *fk: division_id*
+  * name
+* division
+  * name
+* core_earnings_type
+  * identity
+    * annual
+    * hourly
+* core_earnings_type
+  * identity
+    * usd
+* contractor < person
+  * contract_starts_at
+  * contract_ends_at
+  * contract_renewable
+  * *fk: company_id*
+  * earnings
+  * *fk: earnings_type_id*
+  * *fk: currency_id*
+  * reason
+  * explanation
+* company
+  * name
+  * specialty
+* benefactor < person
+  * *fk: person_id*
+  * title
+  * *fk: company_id*
+  * worth
+  * *fk: currency_id*
+* contribution < benefactor
   * *fk: benefactor_id*
-  * *fk: poi_id*
-    * _(Person of Importance)_
+  * amount
+  * *fk: currency_id*
+  * contributed_at
+* poi < person
+  * *fk: poi_category_id*
+  * title
+* poi_category
+  * category
+* prospect < person
+  * *fk: person_id*
+  * *fk: academic_career_id*
+* core_academic_career
+  * identity
+    * undergraduate
+    * graduate
+* prospect_interest < prospect
   * *fk: prospect_id*
-  * *fk: student_id*
+  * *fk: interest_id*
+  * *fk: strength_id*
+  * primary
+* interest
+  * name
+* core_strength
+  * identity
+    * strong
+    * medium
+    * weak
+* student < person
+  * *person_id*
+  * *fk: academic_career_id*
+  * *fk: academic_major_id*
+* academic_major < academic_program
+  * *fk: academic_program_id*
+  * name
+  * active
+* academic_program
+  * name
+  * active
+* alumnus < person
+  * *fk: person_id*
+* alumnus_data
   * *fk: alumnus_id*
-  * *fk: user_id*
+  * *fk: academic_career_id*
+  * *fk: academic_major_id*
+  * graduated_at
 * user < person
   * password
   * *fk: role_id*
