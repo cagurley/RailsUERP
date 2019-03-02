@@ -14,7 +14,7 @@
 * person
 * person_name < person
   * *fk: person_id*
-  * *fk: name_type_id*
+  * *fk: core_name_type_id*
   * first
   * middle
   * last
@@ -29,6 +29,12 @@
     * preferred
     * former
     * other_alias
+  * display
+    * Legal Primary
+    * Legal Alias
+    * Preferred
+    * Former
+    * Other Alias
 * personal_data < person
   * *fk: person_id*
   * birth_date

@@ -1,0 +1,2 @@
+class CoreNameType < ApplicationRecord
+end
