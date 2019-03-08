@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_023048) do
+ActiveRecord::Schema.define(version: 2019_03_08_174228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +28,17 @@ ActiveRecord::Schema.define(version: 2019_03_02_023048) do
   end
 
   create_table "person_names", force: :cascade do |t|
-    t.integer "person_id"
-    t.integer "core_name_type_id"
     t.string "first"
     t.string "middle"
     t.string "last"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "person_id"
+    t.bigint "core_name_type_id"
+    t.index ["core_name_type_id"], name: "index_person_names_on_core_name_type_id"
+    t.index ["person_id"], name: "index_person_names_on_person_id"
   end
 
+  add_foreign_key "person_names", "core_name_types"
+  add_foreign_key "person_names", "people"
 end
