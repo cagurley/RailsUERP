@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+  <%= fields_for :person_names, @person.person_names do |name| %>
+    <%= name.label :first %>
+    <%= name.text_field :first %>
+    <%= name.label :middle %>
+    <%# <%= name.text_field :middle %> %>
+    <%= name.label :last %>
+    <%= name.text_field :last %>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
