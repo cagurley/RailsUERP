@@ -1,4 +1,4 @@
-<%= form_with(model: person, local: true) do |form| %>
+<%= form_for person do |person_form| %>
   <% if person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -11,16 +11,17 @@
     </div>
   <% end %>
 
-  <%= fields_for :person_names, @person.person_names do |name| %>
-    <%= name.label :first %>
-    <%= name.text_field :first %>
-    <%= name.label :middle %>
-    <%# <%= name.text_field :middle %> %>
-    <%= name.label :last %>
-    <%= name.text_field :last %>
+  <%= person_form.fields_for :person_names do |name_form| %>
+    <%= name_form.label :first %>
+    <%= name_form.text_field :first %>
+    <%= name_form.label :middle %>
+    <%= name_form.text_field :middle %>
+    <%= name_form.label :last %>
+    <%= name_form.text_field :last %>
+    <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }) %>
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= person_form.submit %>
   </div>
 <% end %>
