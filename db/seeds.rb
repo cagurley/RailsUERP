@@ -7,9 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Deletions
-CoreNameType.delete_all
-Person.delete_all
-PersonName.delete_all
+Person.destroy_all
+CoreNameType.destroy_all
+
+# PersonName.delete_all
 
 # Core seed data
 CoreNameType.create(id: 1, identity: 'legal_primary', display: 'Legal Primary')

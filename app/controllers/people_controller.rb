@@ -25,24 +25,15 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    # @p = person_params
-    # render plain: @p.to_s
-    # person_params['person_names'].merge({core_name_type_id: 1})
     @person = Person.new(person_params)
 
     respond_to do |format|
       if @person.save
-        # 
-        # name_params.inspect
-        # @name = PersonName.new(name_params)
-        # if @name.save
-          format.html { redirect_to @person, notice: 'Person was successfully created.' }
-          format.json { render :show, status: :created, location: @person }
-        else
-          format.html { render :new }
-          format.json { render json: @person.errors, status: :unprocessable_entity }
-        # end
-        # 
+        format.html { redirect_to @person, notice: 'Person was successfully created.' }
+        format.json { render :show, status: :created, location: @person }
+      else
+        format.html { render :new }
+        format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,10 +71,5 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.fetch(:person, {}).permit(person_names_attributes: [:core_name_type_id, :first, :middle, :last, :_destroy])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def name_params
-      params.fetch(:person_name, {}).permit(:first, :middle, :last)
     end
 end
