@@ -10,12 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_174228) do
+ActiveRecord::Schema.define(version: 2019_03_18_200739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "core_genders", force: :cascade do |t|
+    t.string "identity"
+    t.string "display"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "core_name_types", force: :cascade do |t|
+    t.string "identity"
+    t.string "display"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "core_sexes", force: :cascade do |t|
     t.string "identity"
     t.string "display"
     t.datetime "created_at", null: false
@@ -25,6 +39,20 @@ ActiveRecord::Schema.define(version: 2019_03_08_174228) do
   create_table "people", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "person_demographies", force: :cascade do |t|
+    t.date "birthdate"
+    t.date "alt_birthdate"
+    t.string "gender_description"
+    t.bigint "person_id"
+    t.bigint "core_sex_id"
+    t.bigint "core_gender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["core_gender_id"], name: "index_person_demographies_on_core_gender_id"
+    t.index ["core_sex_id"], name: "index_person_demographies_on_core_sex_id"
+    t.index ["person_id"], name: "index_person_demographies_on_person_id"
   end
 
   create_table "person_names", force: :cascade do |t|

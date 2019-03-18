@@ -35,12 +35,12 @@
     * Preferred
     * Former
     * Other Alias
-* personal_data < person
+* personal_demography < person
   * *fk: person_id*
-  * birth_date
-  * alt_birth_date
-  * *fk: sex_id*
-  * *fk: gender_id*
+  * birthdate
+  * alt_birthdate
+  * *fk: core_sex_id*
+  * *fk: core_gender_id*
   * gender_description
 * core_sex
   * identity
