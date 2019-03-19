@@ -12,6 +12,14 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
+        <% person.person_names.each do |name| %>
+          <% if name.core_name_type_id == 1 then %>
+            <td><%= name.first %></td>
+            <td><%= name.middle %></td>
+            <td><%= name.last %></td>
+            <% break %>
+          <% end %>
+        <% end %>
         <td><%= link_to 'Show', person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
         <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>

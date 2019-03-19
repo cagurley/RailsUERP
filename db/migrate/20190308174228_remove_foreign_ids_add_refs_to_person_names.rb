@@ -1,4 +1,4 @@
-class RemoveForeignIdsAddRefsToPersonName < ActiveRecord::Migration[5.2]
+class RemoveForeignIdsAddRefsToPersonNames < ActiveRecord::Migration[5.2]
   def change
     remove_column :person_names, :person_id, :integer
     remove_column :person_names, :core_name_type_id, :integer

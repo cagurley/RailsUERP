@@ -1,4 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+<h2>ID: <%= @person.id %></h2>
+<div>
+  <h3>Legal Primary Name</h3>
+  <strong>First: </strong><span><%= @lpname.first %></span>
+  <strong>Middle: </strong><span><%= @lpname.middle %></span>
+  <strong>Last: </strong><span><%= @lpname.last %></span>
+</div>
+<div>
+  <h3>Demographic Info</h3>
+  <strong>Birthdate: </strong><span><%= @demography.birthdate %></span>
+  <strong>Alternate birthdate: </strong><span><%= @demography.alt_birthdate %></span>
+  <strong>Sex: </strong><span><%= @demography.core_sex.display %></span>
+  <strong>Gender: </strong><span><%= @demography.core_gender.display %></span>
+  <strong>Gender description: </strong><span><%= @demography.gender_description %></span>
+</div>
+<div>
+  <%= link_to 'Edit', edit_person_path(@person) %> |
+  <%= link_to 'Back', people_path %>
+</div>

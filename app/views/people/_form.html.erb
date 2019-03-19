@@ -11,14 +11,29 @@
     </div>
   <% end %>
 
+  <h4>Legal Primary Name</h4>
   <%= person_form.fields_for :person_names do |name_form| %>
+    <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, {selected: 1}, {hidden: true}) %>
     <%= name_form.label :first %>
     <%= name_form.text_field :first %>
     <%= name_form.label :middle %>
     <%= name_form.text_field :middle %>
     <%= name_form.label :last %>
     <%= name_form.text_field :last %>
-    <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }) %>
+  <% end %>
+
+  <h4>Demographic Information</h4>
+  <%= person_form.fields_for :person_demography do |demo_form| %>
+    <%= demo_form.label :birthdate %>
+    <%= demo_form.date_field :birthdate %>
+    <%= demo_form.label :alt_birthdate %>
+    <%= demo_form.date_field :alt_birthdate %>
+    <%= demo_form.label 'Sex' %>
+    <%= demo_form.select(:core_sex_id, CoreSex.all.collect { |cs| [cs.display, cs.id] }) %>
+    <%= demo_form.label 'Gender' %>
+    <%= demo_form.select(:core_gender_id, CoreGender.all.collect { |cg| [cg.display, cg.id] }) %>
+    <%= demo_form.label :gender_description %>
+    <%= demo_form.text_field :gender_description %>
   <% end %>
 
   <div class="actions">

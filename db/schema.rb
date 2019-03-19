@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_200739) do
+ActiveRecord::Schema.define(version: 2019_03_19_184854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,9 @@ ActiveRecord::Schema.define(version: 2019_03_18_200739) do
     t.index ["person_id"], name: "index_person_names_on_person_id"
   end
 
+  add_foreign_key "person_demographies", "core_genders"
+  add_foreign_key "person_demographies", "core_sexes"
+  add_foreign_key "person_demographies", "people"
   add_foreign_key "person_names", "core_name_types"
   add_foreign_key "person_names", "people"
 end
