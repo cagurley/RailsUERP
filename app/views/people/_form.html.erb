@@ -13,13 +13,15 @@
 
   <h4>Legal Primary Name</h4>
   <%= person_form.fields_for :person_names do |name_form| %>
-    <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, {selected: 1}, {hidden: true}) %>
-    <%= name_form.label :first %>
-    <%= name_form.text_field :first %>
-    <%= name_form.label :middle %>
-    <%= name_form.text_field :middle %>
-    <%= name_form.label :last %>
-    <%= name_form.text_field :last %>
+    <%# if :core_name_type_id == 1 %>
+      <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, {selected: 1}, {hidden: true}) %>
+      <%= name_form.label :first %>
+      <%= name_form.text_field :first %>
+      <%= name_form.label :middle %>
+      <%= name_form.text_field :middle %>
+      <%= name_form.label :last %>
+      <%= name_form.text_field :last %>
+    <%# end %>
   <% end %>
 
   <h4>Demographic Information</h4>

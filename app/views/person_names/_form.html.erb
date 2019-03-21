@@ -1,0 +1,27 @@
+<%= form_for [person, name] do |name_form| %>
+  <% if name.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(name.errors.count, "error") %> prohibited this name from being saved:</h2>
+
+      <ul>
+      <% name.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= name.person_id %>
+  <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, disabled: person.person_names.collect { |pn| pn.core_name_type_id } ) %>
+  <span>Disabled name type? It already exists! Find it in the edit view.</span>
+  <%= name_form.label :first %>
+  <%= name_form.text_field :first %>
+  <%= name_form.label :middle %>
+  <%= name_form.text_field :middle %>
+  <%= name_form.label :last %>
+  <%= name_form.text_field :last %>
+
+  <div class="actions">
+    <%= name_form.submit %>
+  </div>
+<% end %>

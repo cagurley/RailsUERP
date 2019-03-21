@@ -78,6 +78,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.fetch(:person, {}).permit(person_names_attributes: [:core_name_type_id, :first, :middle, :last, :_destroy], person_demography_attributes: [:core_sex_id, :core_gender_id, :birthdate, :alt_birthdate, :gender_description])
+      params.fetch(:person, {}).permit(person_names_attributes: [:core_name_type_id, :first, :middle, :last], person_demography_attributes: [:core_sex_id, :core_gender_id, :birthdate, :alt_birthdate, :gender_description])
     end
 end

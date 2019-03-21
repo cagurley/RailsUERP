@@ -1,0 +1,32 @@
+<h1>Editing Name Types</h1>
+
+<%= @person.id %>
+<%= form_for @person do |person_form| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this name from being saved:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= person_form.fields_for :person_names do |name_form| %>
+    <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, {}, {disabled: true} ) %>
+    <%= name_form.label :first %>
+    <%= name_form.text_field :first %>
+    <%= name_form.label :middle %>
+    <%= name_form.text_field :middle %>
+    <%= name_form.label :last %>
+    <%= name_form.text_field :last %>
+  <% end %>
+
+  <div class="actions">
+    <%= person_form.submit 'Update Names' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', person_person_names_path %>

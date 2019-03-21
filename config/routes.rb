@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  resources :people
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :people do
+    resources :person_names, path: '/names', only: [:index, :new, :create]
+    resource :person_names, only: [:edit]
+  end
 end
