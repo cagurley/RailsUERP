@@ -5,7 +5,6 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
-    # includes(:person_names).where('person_names.core_name_type_id = 1').references(:person_names)
   end
 
   # GET /people/1
@@ -18,23 +17,28 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
-    @person.person_names.build
+    @person_names = @person.person_names.build
     @person.build_person_demography
   end
 
   # GET /people/1/edit
   def edit
+    @person_names = @person.person_names.select { |name| name.core_name_type_id == 1 }
   end
 
   # POST /people
   # POST /people.json
-  def create
-    @person = Person.new(person_params)
+  def create    
+    name_params = params.fetch(:person_name, {}).permit(:core_name_type_id, :first, :middle, :last).merge!(person_params[:person_name])
+    new_pp = person_params
+    new_pp.delete :person_name
+    @person = Person.new(new_pp)
+    @person.person_names.build(name_params)
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
-        format.json { render :show, status: :created, location: @person }
+          format.html { redirect_to @person, notice: 'Person was successfully created.' }
+          format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new }
         format.json { render json: @person.errors, status: :unprocessable_entity }
@@ -45,10 +49,10 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
-    @pn = PersonName.find_or_create_by(person_id: @person.id, core_name_type_id: 1)
-    name_params = params.fetch(:person_name, {}).permit(:core_name_type_id, :first, :middle, :last).merge!(person_params[:person_names_attributes]['0'])
+    name_params = params.fetch(:person_name, {}).permit(:core_name_type_id, :first, :middle, :last).merge!(person_params[:person_name])
     new_pp = person_params
-    new_pp.delete :person_names_attributes
+    new_pp.delete :person_name
+    @pn = PersonName.find_or_create_by(person_id: @person.id, core_name_type_id: 1)
     respond_to do |format|
       if @person.update(new_pp) and @pn.update(name_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
@@ -78,6 +82,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.fetch(:person, {}).permit(person_names_attributes: [:core_name_type_id, :first, :middle, :last], person_demography_attributes: [:core_sex_id, :core_gender_id, :birthdate, :alt_birthdate, :gender_description])
+      params.fetch(:person, {}).permit(person_name: [:core_name_type_id, :first, :middle, :last], person_demography_attributes: [:core_sex_id, :core_gender_id, :birthdate, :alt_birthdate, :gender_description])
     end
 end
