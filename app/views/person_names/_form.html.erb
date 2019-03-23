@@ -12,7 +12,7 @@
   <% end %>
 
   <%= name.person_id %>
-  <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, disabled: person.person_names.collect { |pn| pn.core_name_type_id } ) %>
+  <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, disabled: @cnt) %>
   <span>Disabled name type? It already exists! Find it in the edit view.</span>
   <%= name_form.label :first %>
   <%= name_form.text_field :first %>

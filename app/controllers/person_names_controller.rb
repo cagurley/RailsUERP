@@ -8,9 +8,11 @@ class PersonNamesController < ApplicationController
 
   def new
     @pn = @person.person_names.build
+    @cnt = @person.person_names.collect { |pn| pn.core_name_type_id }
   end
 
   def edit
+    @cnt = CoreNameType.all.collect { |cnt| cnt.id } .reject { |id| id == @pn.core_name_type_id }
   end
 
   def create
