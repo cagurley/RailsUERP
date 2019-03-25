@@ -1,1 +1,22 @@
 @import "bootstrap";
+
+body {
+  background-color: #e5edf6;
+}
+
+body * {
+  color: #8d7c3c;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar {
+  background-color: #26619c !important;
+}
+
+.navbar * {
+  color: #f4d251 !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+}
