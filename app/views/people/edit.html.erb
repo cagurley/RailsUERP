@@ -1,6 +1,8 @@
-<h1>Editing Person</h1>
+<h1 class="display-4">ID: <%= @person.id %></h1>
 
 <%= render 'form', person: @person %>
 
-<%= link_to 'Show', @person %> |
-<%= link_to 'Back', people_path %>
+<div>
+  <%= link_to 'Show', @person, {class: 'btn'} %>
+  <%= link_to 'Back', people_path, {class: 'btn'} %>
+</div>

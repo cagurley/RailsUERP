@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h2>ID: <%= @person.id %></h2>
+<h1 class="display-4">ID: <%= @person.id %></h1>
 <div>
   <h3>Legal Primary Name</h3>
   <strong>First: </strong><span><%= @lpname.first %></span>
@@ -16,6 +14,10 @@
   <strong>Gender description: </strong><span><%= @demography.gender_description %></span>
 </div>
 <div>
-  <%= link_to 'Edit', edit_person_path(@person) %> |
-  <%= link_to 'Back', people_path %>
+  <%= link_to 'Edit', edit_person_path(@person), {class: 'btn'} %>
+  <%= link_to 'Back', people_path, {class: 'btn'} %>
 </div>
+<p id="notice">
+  <br>
+  <%= notice %>
+</p>

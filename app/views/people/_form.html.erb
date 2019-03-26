@@ -1,6 +1,6 @@
 <%= form_for person do |person_form| %>
   <% if person.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-warning" id="error_explanation">
       <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
 
       <ul>

@@ -1,6 +1,6 @@
 <%= form_for [person, name] do |name_form| %>
   <% if name.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-warning" id="error_explanation">
       <h2><%= pluralize(name.errors.count, "error") %> prohibited this name from being saved:</h2>
 
       <ul>
@@ -11,17 +11,29 @@
     </div>
   <% end %>
 
-  <%= name.person_id %>
-  <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, disabled: @cnt) %>
-  <span>Disabled name type? It already exists! Find it in the edit view.</span>
-  <%= name_form.label :first %>
-  <%= name_form.text_field :first %>
-  <%= name_form.label :middle %>
-  <%= name_form.text_field :middle %>
-  <%= name_form.label :last %>
-  <%= name_form.text_field :last %>
-
+  <div class="form-row">
+    <div class="form-group">
+      <%= name_form.label :core_name_type_id, 'Type' %>
+      <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, {disabled: @cnt}, {class: 'form-control'}) %>
+      <small class="form-text">Disabled name type? You're editing or it already exists! Click <%= link_to 'back', person_person_names_path %> to find or create it.</small>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-4">
+      <%= name_form.label :first %>
+      <%= name_form.text_field :first, class: 'form-control' %>
+    </div>
+    <div class="form-group col-4">
+      <%= name_form.label :middle %>
+      <%= name_form.text_field :middle, class: 'form-control' %>
+    </div>
+    <div class="form-group col-4">
+      <%= name_form.label :last %>
+      <%= name_form.text_field :last, class: 'form-control' %>
+    </div>
+  </div>
   <div class="actions">
-    <%= name_form.submit %>
+    <%= name_form.submit nil, class: 'btn' %>
+    <%= link_to 'Back', person_person_names_path, {class: 'btn'} %>
   </div>
 <% end %>

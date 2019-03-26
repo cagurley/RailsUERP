@@ -4,9 +4,19 @@ body {
   background-color: #e5edf6;
 }
 
-body * {
+body *,
+.form-control {
   color: #8d7c3c;
   font-family: 'Montserrat', sans-serif;
+}
+
+label {
+  font-weight: 600;
+}
+
+option:disabled,
+input:disabled {
+  color: #ff8989;
 }
 
 .page {
@@ -66,7 +76,10 @@ body * {
 }
 
 @media all and (max-width: 992px) {
-  .row {
+  form,
+  .form-control,
+  .row,
+  .btn {
     font-size: 1.5rem;
   }
 }
