@@ -12,6 +12,7 @@ body * {
 .page {
   padding-left: 5%;
   padding-right: 5%;
+  padding-bottom: 30px;
 }
 
 .navbar {
@@ -36,10 +37,18 @@ body * {
   font-size: 95%;
   font-weight: 600;
   background-color: #5b88b4 !important;
+  color: #f4d251 !important;
 }
 
-.badge * {
-  color: #f4d251 !important;
+.badge:hover,
+.badge:focus,
+.btn:hover,
+.btn:focus,
+.navbar-brand:hover,
+.navbar-brand:focus,
+.nav-link:hover,
+.nav-link:focus {
+  opacity: 0.5;
 }
 
 .btn {
@@ -49,4 +58,15 @@ body * {
 
 .display-4 {
   padding-bottom: 0.5rem;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+@media all and (max-width: 992px) {
+  .row {
+    font-size: 1.5rem;
+  }
 }

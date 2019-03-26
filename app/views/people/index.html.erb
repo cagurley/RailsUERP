@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1 class="display-4">People</h1>
-
 <ul class="list-group">
   <% @people.each do |person| %>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
+    <li class="list-group-item d-flex row align-items-center">
+      <strong class="d-flex col-12 col-sm-6 col-lg-3 justify-content-center">ID: <%= person.id %></strong>
       <% person.person_names.each do |name| %>
         <% if name.core_name_type_id == 1 then %>
-          <em>
+          <em class="d-flex col-12 col-sm-6 col-lg-3 justify-content-center">
             <%= name.first %>
             <%= name.middle %>
             <%= name.last %>
@@ -15,11 +15,25 @@
           <% break %>
         <% end %>
       <% end %>
-      <div>
-        <span class="badge badge-pill"><%= link_to 'Show', person %></span>
-        <span class="badge badge-pill"><%= link_to 'Names', person_person_names_path(person) %></span>
-        <span class="badge badge-pill"><%= link_to 'Edit', edit_person_path(person) %></span>
-        <span class="badge badge-pill"><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      <div class="d-block d-lg-none d-xl-block col-xl-1">
+        &nbsp;
+      </div>
+      <div class="d-flex row col-12 col-lg-6 col-xl-5 justify-content-between">
+        <div class="container col-6 col-md-3 d-flex justify-content-end justify-content-sm-center">
+          <%= link_to 'Show', person, {class: 'badge badge-pill'} %>
+        </div>
+        <div class="container col-6 col-md-3 d-flex justify-content-start justify-content-sm-center">
+          <%= link_to 'Names', person_person_names_path(person), {class: 'badge badge-pill'} %>
+        </div>
+        <div class="d-block d-md-none col-12">
+          &nbsp;
+        </div>
+        <div class="container col-6 col-md-3 d-flex justify-content-end justify-content-sm-center">
+          <%= link_to 'Edit', edit_person_path(person), {class: 'badge badge-pill'} %>
+        </div>
+        <div class="container col-6 col-md-3 d-flex justify-content-start justify-content-sm-center">
+          <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-pill' %>
+        </div>
       <div>
     </li>
   <% end %>
@@ -27,6 +41,6 @@
 
 <br>
 
-<div class="btn-group" role="group">
+<div>
   <%= link_to 'New Person', new_person_path, {class: 'btn'} %>
 </div>

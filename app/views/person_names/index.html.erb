@@ -1,32 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @person.id %></h1>
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @names.each do |name| %>
-      <tr>
-        <td><%= name.core_name_type.display %></td>
-        <td><%= name.first %></td>
-        <td><%= name.middle %></td>
-        <td><%= name.last %></td>
-        <td><%= link_to 'Edit', edit_person_person_name_path(@person, name) %></td>
+<h1 class="display-4">ID: <%= @person.id %></h1>
+<ul class="list-group">
+  <% @names.each do |name| %>
+    <li class="list-group-item d-flex row align-items-center">
+      <strong class="d-flex col-12 col-sm-6 col-lg-4 justify-content-center"><%= name.core_name_type.display %></strong>
+      <em class="d-flex col-12 col-sm-6 col-lg-4 justify-content-center">
+        <%= name.first %>
+        <%= name.middle %>
+        <%= name.last %>
+      </em>
+      <div class="d-block d-lg-none">
+        &nbsp;
+      </div>
+      <div class="d-flex col-12 col-lg-4 justify-content-between">
+        <div class="container d-flex justify-content-center">
+          <%= link_to 'Edit', edit_person_person_name_path(@person, name), {class: 'badge badge-pill'} %>
+        </div>
         <% if name.core_name_type_id != 1 %>
-          <td><%= link_to 'Destroy', [@person, name], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <div class="container d-flex justify-content-center">
+            <%= link_to 'Destroy', [@person, name], method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-pill' %>
+          </div>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
 <br>
 
 <div>
-  <%= link_to 'New Name Type', new_person_person_name_path %> |
-  <%= link_to 'Back', person_path(@person) %>
+  <%= link_to 'New Name Type', new_person_person_name_path, {class: 'btn'} %>
+  <%= link_to 'Back', person_path(@person), {class: 'btn'} %>
 </div>
 
