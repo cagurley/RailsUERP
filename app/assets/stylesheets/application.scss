@@ -9,14 +9,44 @@ body * {
   font-family: 'Montserrat', sans-serif;
 }
 
+.page {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 .navbar {
   background-color: #26619c !important;
 }
 
-.navbar * {
+.navbar *,
+.badge *,
+.btn {
   color: #f4d251 !important;
 }
 
 .navbar-brand {
   font-weight: 700;
+}
+
+.nav-item {
+  font-weight: 500;
+}
+
+.badge {
+  font-size: 95%;
+  font-weight: 600;
+  background-color: #5b88b4 !important;
+}
+
+.badge * {
+  color: #f4d251 !important;
+}
+
+.btn {
+  background-color: #5b88b4 !important;
+  font-weight: 600;
+}
+
+.display-4 {
+  padding-bottom: 0.5rem;
 }

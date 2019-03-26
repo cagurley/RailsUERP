@@ -1,34 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<h1>People</h1>
+<h1 class="display-4">People</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <% person.person_names.each do |name| %>
-          <% if name.core_name_type_id == 1 then %>
-            <td><%= name.first %></td>
-            <td><%= name.middle %></td>
-            <td><%= name.last %></td>
-            <% break %>
-          <% end %>
+<ul class="list-group">
+  <% @people.each do |person| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <% person.person_names.each do |name| %>
+        <% if name.core_name_type_id == 1 then %>
+          <em>
+            <%= name.first %>
+            <%= name.middle %>
+            <%= name.last %>
+          </em>
+          <% break %>
         <% end %>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Names', person_person_names_path(person) %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+      <div>
+        <span class="badge badge-pill"><%= link_to 'Show', person %></span>
+        <span class="badge badge-pill"><%= link_to 'Names', person_person_names_path(person) %></span>
+        <span class="badge badge-pill"><%= link_to 'Edit', edit_person_path(person) %></span>
+        <span class="badge badge-pill"><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      <div>
+    </li>
+  <% end %>
+</ul>
 
 <br>
 
-<%= link_to 'New Person', new_person_path %>
+<div class="btn-group" role="group">
+  <%= link_to 'New Person', new_person_path, {class: 'btn'} %>
+</div>
