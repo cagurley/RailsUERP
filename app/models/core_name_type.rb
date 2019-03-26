@@ -1,3 +1,3 @@
 class CoreNameType < ApplicationRecord
-    # One for each person_name
+	# One for each person_name
 end
