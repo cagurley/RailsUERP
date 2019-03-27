@@ -1,17 +1,39 @@
 <h1 class="display-4">ID: <%= @person.id %></h1>
-<div>
-  <h3>Legal Primary Name</h3>
-  <strong>First: </strong><span><%= @lpname.first %></span>
-  <strong>Middle: </strong><span><%= @lpname.middle %></span>
-  <strong>Last: </strong><span><%= @lpname.last %></span>
-</div>
-<div>
-  <h3>Demographic Info</h3>
-  <strong>Birthdate: </strong><span><%= @demography.birthdate %></span>
-  <strong>Alternate birthdate: </strong><span><%= @demography.alt_birthdate %></span>
-  <strong>Sex: </strong><span><%= @demography.core_sex.display %></span>
-  <strong>Gender: </strong><span><%= @demography.core_gender.display %></span>
-  <strong>Gender description: </strong><span><%= @demography.gender_description %></span>
+<div class="card">
+  <div class="card-body d-flex row align-items-center">
+    <h5 class="card-title d-inline-block col mr-auto">
+      <%= @lpname.first %>
+      <%= @lpname.middle %>
+      <%= @lpname.last %>
+    </h5>
+    <%= link_to 'Names', person_person_names_path(@person), {class: 'btn'} %>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item align-items-center">
+      <em class="show-label">Birthdate: </em>
+      <span>
+        <%= @demography.birthdate %>
+        <% if @demography.alt_birthdate %>
+          (alt: <%= @demography.alt_birthdate %>)
+        <% end %>
+      </span>
+    </li>
+    <li class="list-group-item align-items-center">
+      <em class="show-label">Sex: </em>
+      <span>
+        <%= @demography.core_sex.display %>
+      </span>
+    </li>
+    <li class="list-group-item align-items-center">
+      <em class="show-label">Gender: </em>
+      <span>
+        <%= @demography.core_gender.display %>
+        <% if @demography.gender_description.length > 0 %>
+          "<%= @demography.gender_description %>"
+        <% end %>
+      </span>
+    </li>
+  </ul>
 </div>
 <div>
   <%= link_to 'Edit', edit_person_path(@person), {class: 'btn'} %>

@@ -9,6 +9,10 @@ h3 {
   padding-bottom: 0.5rem;
 }
 
+h5 {
+  font-weight: 600;
+}
+
 body *,
 .form-control {
   color: #8d7c3c;
@@ -86,15 +90,27 @@ input:disabled {
   margin-right: 0px;
 }
 
+.card {
+  margin-bottom: 1rem;
+}
+
+.show-label {
+  font-weight: 500;
+}
+
 @media all and (max-width: 992px) {
   form,
   .form-control,
-  .row,
-  .btn {
+  .btn,
+  .list-group-item {
     font-size: 1.5rem;
   }
 
   h3 {
     font-size: 2.25rem;
+  }
+
+  h5 {
+    font-size: 1.875rem;
   }
 }

@@ -33,7 +33,7 @@ class PeopleController < ApplicationController
     new_pp = person_params
     new_pp.delete :person_name
     @person = Person.new(new_pp)
-    @person.person_names.build(name_params)
+    @person_names = @person.person_names.build(name_params)
 
     respond_to do |format|
       if @person.save
