@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="form-row">
-    <div class="form-group">
+    <div class="form-group col-12">
       <%= name_form.label :core_name_type_id, 'Type' %>
       <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, {disabled: @cnt}, {class: 'form-control'}) %>
       <small class="form-text">Disabled name type? You're editing or it already exists! Click <%= link_to 'back', person_person_names_path %> to find or create it.</small>
