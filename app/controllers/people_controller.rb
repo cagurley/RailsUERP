@@ -57,13 +57,18 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1.json
   def update
     # Same as create with the addition of preventing creating
-    # rather than updating the person_name, again due to has_many
+    # rather than updating the person_name, again due to has_many;
+    # editing for demo_params prevents the deletion and insertion
+    # of person_demography in favor of a true update
     name_params = params.fetch(:person_name, {}).permit(:core_name_type_id, :first, :middle, :last).merge!(person_params[:person_name])
+    demo_params = params.fetch(:person_demography, {}).permit(:birthdate, :alt_birthdate, :core_sex_id, :core_gender_id).merge!(person_params[:person_demography_attributes])
     new_pp = person_params
     new_pp.delete :person_name
+    new_pp.delete :person_demography_attributes
     @pn = PersonName.find_or_create_by(person_id: @person.id, core_name_type_id: 1)
+    @pd = PersonDemography.find_or_create_by(person_id: @person.id)
     respond_to do |format|
-      if @person.update(new_pp) and @pn.update(name_params)
+      if @person.update(new_pp) and @pn.update(name_params) and @pd.update(demo_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
