@@ -13,7 +13,6 @@
 
   <div class="">
     <h3>Legal Primary Name</h3>
-    <% person.person_names.select { |name| name.core_name_type_id == 1 } %>
     <%= person_form.fields_for @person_names do |name_form| %>
       <%= name_form.select(:core_name_type_id, CoreNameType.all.collect { |cnt| [cnt.display, cnt.id] }, {selected: 1}, {hidden: true, class: 'form-control'}) %>
       <div class="form-row">

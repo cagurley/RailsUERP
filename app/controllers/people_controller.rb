@@ -1,6 +1,10 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  # All references to person_names only reference the
+  # 'legal primary', id: 1, name type; other name
+  # types are handled by person_names_controller
+
   # GET /people
   # GET /people.json
   def index
@@ -28,7 +32,10 @@ class PeopleController < ApplicationController
 
   # POST /people
   # POST /people.json
-  def create    
+  def create
+    # This removes the :person_name params from person_params
+    # and creates the person.person_name separately due to a
+    # pluralization naming convention conflict with has_many associations
     name_params = params.fetch(:person_name, {}).permit(:core_name_type_id, :first, :middle, :last).merge!(person_params[:person_name])
     new_pp = person_params
     new_pp.delete :person_name
@@ -49,6 +56,8 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
+    # Same as create with the addition of preventing creating
+    # rather than updating the person_name, again due to has_many
     name_params = params.fetch(:person_name, {}).permit(:core_name_type_id, :first, :middle, :last).merge!(person_params[:person_name])
     new_pp = person_params
     new_pp.delete :person_name
