@@ -1,5 +1,6 @@
 class PersonPhotosController < ApplicationController
   before_action :set_person
+  before_action :set_photo, only: [:show, :serve]
 
   def index
   end
@@ -32,9 +33,17 @@ class PersonPhotosController < ApplicationController
   def destroy
   end
 
+  def serve
+    send_data @photo.image
+  end
+
   private
     def set_person
       @person = Person.find(params[:person_id])
+    end
+
+    def set_photo
+      @photo = @person.person_photos.find(params[:id])
     end
 
     def photo_params
