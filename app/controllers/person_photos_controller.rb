@@ -16,6 +16,8 @@ class PersonPhotosController < ApplicationController
     @photo = @person.person_photos.build(photo_params) do |p|
       if photo_params[:image]
         p.image = photo_params[:image].read
+        p.filename = photo_params[:image].original_filename
+        p.mime_type = photo_params[:image].content_type
       end
     end
 
@@ -34,7 +36,7 @@ class PersonPhotosController < ApplicationController
   end
 
   def serve
-    send_data @photo.image
+    send_data @photo.image, filename: @photo.filename, type: @photo.mime_type, disposition: 'inline'
   end
 
   private

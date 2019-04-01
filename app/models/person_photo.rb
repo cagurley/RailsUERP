@@ -1,4 +1,4 @@
 class PersonPhoto < ApplicationRecord
   belongs_to :person
-  validates :image, presence: true
+  validates :image, :filename, :mime_type, presence: true
 end
