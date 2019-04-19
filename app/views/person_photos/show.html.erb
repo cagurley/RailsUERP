@@ -1,3 +1,25 @@
-<h1>PersonPhoto#show</h1>
-<p>Find me in app/views/person_photo/show.html.erb</p>
-<%= image_tag serve_person_person_photo_path(@photo.person_id, @photo) %>
+<h1 class="display-4">ID: <%= @photo.person_id %></h1>
+<div class="card">
+  <%= image_tag serve_person_person_photo_path(@photo.person_id, @photo), {class: 'card-img-top'} %>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item align-items-center">
+      <em class="show-label">Filename: </em>
+      <span>
+        <%= @photo.filename %>
+      </span>
+    </li>
+    <li class="list-group-item align-items-center">
+      <em class="show-label">Current: </em>
+      <span>
+        <%= @photo.current %>
+      </span>
+    </li>
+  </ul>
+</div>
+<div>
+  <%= link_to 'Back', person_person_photos_path, {class: 'btn'} %>
+</div>
+<p id="notice">
+  <br>
+  <%= notice %>
+</p>
