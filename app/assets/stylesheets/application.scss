@@ -98,6 +98,15 @@ input:disabled {
   font-weight: 500;
 }
 
+.card-img-top {
+  max-height: 30vh;
+  max-width: 30vw;
+}
+
+.card {
+  max-width: 30vw;
+}
+
 @media all and (max-width: 992px) {
   form,
   .form-control,
